@@ -97,19 +97,19 @@ function emergencyExit(address receiver) external onlyGovernance {
 2. In callback, delegate voting power to attacker contract<br>
 3. Now attacker has >750k votes (majority)<br>
 
-**Phase 2: Queue Malicious Proposal**
+**Phase 2: Queue Malicious Proposal**<br>
 4. Call `governance.queueAction()` with:
    - Target: SelfiePool address
    - Value: 0
    - Data: `emergencyExit(recovery)` encoded<br>
 5. Action queued with actionId, timestamp recorded<br>
 
-**Phase 3: Repay and Wait**
+**Phase 3: Repay and Wait**<br>
 6. Approve flash loan repayment<br>
 7. Return flash loan (lose tokens but KEEP the queued action)<br>
 8. Wait 2 days for governance timelock<br>
 
-**Phase 4: Execute**
+**Phase 4: Execute** <br>
 9. Call `governance.executeAction(actionId)`<br>
 10. EmergencyExit executes, sending all 1.5M DVT to recovery<br>
 

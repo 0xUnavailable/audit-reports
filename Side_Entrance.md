@@ -40,7 +40,7 @@
 
 **Attack Priority:**
 
-1. **FlashLoan → Deposit → Withdraw** — Profit: 1000 ETH, Cost: Gas only
+ **FlashLoan → Deposit → Withdraw** — Profit: 1000 ETH, Cost: Gas only
 
    * Likelihood: High (attacker can implement `execute()` callback)
    * Impact: Critical (complete drainage)
@@ -104,11 +104,11 @@ function flashLoan(uint256 amount) external {
 2. Exploit calls `pool.flashLoan(amount)` with `amount = 1000 ETH` (entire balance).<br>
 3. Pool sends 1000 ETH to `Exploit.execute()`.<br>
 
-**Phase 2: Create Internal Balance**
+**Phase 2: Create Internal Balance** <br>
 4. Inside `execute()`, `Exploit` calls `pool.deposit{value: amount}()`. This sets `balances[address(Exploit)] += amount` on the pool.<br>
 5. The pool’s `address(this).balance` after `deposit` is equal to `balanceBefore` so the repay check passes.<br>
 
-**Phase 3: Withdraw**
+**Phase 3: Withdraw**<br>
 6. After the flashLoan returns, the attacker calls `pool.withdraw()` from `Exploit` (or `Exploit` calls it in the same transaction).<br>
 7. `withdraw()` sends the credited 1000 ETH to the attacker-controlled contract, which is then forwarded to the designated recovery account.
 
