@@ -2,7 +2,6 @@
 
 **Protocol:** Side Entrance
 **Challenge:** Damn Vulnerable DeFi
-**Auditor:** 0xUnavailable
 **Time Spent:** 30 minutes
 **Status:** Solved
 

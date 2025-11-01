@@ -2,7 +2,6 @@
 
 **Protocol:** Selfie 
 **Challenge:** Damn Vulnerable DeFi
-**Auditor:** 0xUnavailable  
 **Time Spent:** 40 minutes  
 **Status:** Solved
 ---
