@@ -322,4 +322,4 @@ Red flags:
 
 *Report generated on [1-11-2025] by [0xUnavailable]*  
 *GitHub: [https://github.com/0xUnavailable]*  
-*Twitter: [0xUnavailable]*
+*Twitter: [https://x.com/0xUnavailable]*

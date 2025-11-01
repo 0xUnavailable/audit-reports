@@ -229,4 +229,4 @@ IBorrower(borrower).executeFlashLoan(msg.sender, token, amount, data);
 
 *Report generated on [30-10-2025] by [0xUnavailable]*  
 *GitHub: [https://github.com/0xUnavailable]*  
-*Twitter: [0xUnavailable]*
+*Twitter: [https://x.com/0xUnavailable]*
