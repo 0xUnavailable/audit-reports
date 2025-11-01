@@ -1,8 +1,8 @@
 # Truster — Audit Report
 
-**Protocol:** Truster
-**Challenge:** Damn Vulnerable DeFi
-**Time Spent:** 30 minutes
+**Protocol:** Truster<br>
+**Challenge:** Damn Vulnerable DeFi — Truster<br>
+**Time Spent:** 30 minutes<br>
 **Status:** Solved
 
 ---
@@ -203,9 +203,9 @@ IBorrower(borrower).executeFlashLoan(msg.sender, token, amount, data);
 
 **Key Takeaways:**
 
-1. External calls from fund-holding contracts are highly dangerous.
-2. Use explicit, restricted callback interfaces instead of arbitrary delegate calls.
-3. Validate and/or whitelist callable targets and disallow interactions with token contracts.
+1. External calls from fund-holding contracts are highly dangerous.<br>
+2. Use explicit, restricted callback interfaces instead of arbitrary delegate calls.<br>
+3. Validate and/or whitelist callable targets and disallow interactions with token contracts.<br>
 
 **Real-World Examples:** Similar approval-based drains have been used in CTF-style challenges and real exploits that abuse unrestricted external calls.
 

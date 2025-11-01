@@ -1,8 +1,8 @@
 # Side Entrance — Audit Report
 
-**Protocol:** Side Entrance
-**Challenge:** Damn Vulnerable DeFi
-**Time Spent:** 30 minutes
+**Protocol:** Side Entrance<br>
+**Challenge:** Damn Vulnerable DeFi<br>
+**Time Spent:** 30 minutes<br>
 **Status:** Solved
 
 ---
@@ -100,16 +100,16 @@ function flashLoan(uint256 amount) external {
 
 **Phase 1: Borrow & Credit**
 
-1. Attacker deploys `Exploit` contract that implements `execute()` payable.
-2. Exploit calls `pool.flashLoan(amount)` with `amount = 1000 ETH` (entire balance).
-3. Pool sends 1000 ETH to `Exploit.execute()`.
+1. Attacker deploys `Exploit` contract that implements `execute()` payable.<br>
+2. Exploit calls `pool.flashLoan(amount)` with `amount = 1000 ETH` (entire balance).<br>
+3. Pool sends 1000 ETH to `Exploit.execute()`.<br>
 
 **Phase 2: Create Internal Balance**
-4. Inside `execute()`, `Exploit` calls `pool.deposit{value: amount}()`. This sets `balances[address(Exploit)] += amount` on the pool.
-5. The pool’s `address(this).balance` after `deposit` is equal to `balanceBefore` so the repay check passes.
+4. Inside `execute()`, `Exploit` calls `pool.deposit{value: amount}()`. This sets `balances[address(Exploit)] += amount` on the pool.<br>
+5. The pool’s `address(this).balance` after `deposit` is equal to `balanceBefore` so the repay check passes.<br>
 
 **Phase 3: Withdraw**
-6. After the flashLoan returns, the attacker calls `pool.withdraw()` from `Exploit` (or `Exploit` calls it in the same transaction).
+6. After the flashLoan returns, the attacker calls `pool.withdraw()` from `Exploit` (or `Exploit` calls it in the same transaction).<br>
 7. `withdraw()` sends the credited 1000 ETH to the attacker-controlled contract, which is then forwarded to the designated recovery account.
 
 ---
@@ -202,9 +202,9 @@ contract SideEntranceExploit {
 
 **Key Takeaways:**
 
-1. Internal accounting must not be trivially manipulated during flash callbacks.
-2. Flash loan callbacks should be tightly specified and checked.
-3. Never assume `address(this).balance` invariants are sufficient if internal ledger entries can be manipulated during the callback.
+1. Internal accounting must not be trivially manipulated during flash callbacks.<br>
+2. Flash loan callbacks should be tightly specified and checked.<br>
+3. Never assume `address(this).balance` invariants are sufficient if internal ledger entries can be manipulated during the callback.<br>
 
 **Real-World Examples:** Several CTF-style and production incidents where deposit/withdraw accounting combined with flash loan callbacks enabled full-drain exploits.
 

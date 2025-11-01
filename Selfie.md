@@ -1,8 +1,8 @@
 # Selfie - Audit Report
 
-**Protocol:** Selfie 
-**Challenge:** Damn Vulnerable DeFi
-**Time Spent:** 40 minutes  
+**Protocol:** Selfie<br>
+**Challenge:** Damn Vulnerable DeFi<br>
+**Time Spent:** 40 minutes<br>
 **Status:** Solved
 ---
 
@@ -93,25 +93,25 @@ function emergencyExit(address receiver) external onlyGovernance {
 ### Step-by-Step Exploit
 
 **Phase 1: Acquire Voting Power**
-1. Request flash loan of 1,500,000 DVT (>50% of 2M total supply)
-2. In callback, delegate voting power to attacker contract
-3. Now attacker has >750k votes (majority)
+1. Request flash loan of 1,500,000 DVT (>50% of 2M total supply)<br>
+2. In callback, delegate voting power to attacker contract<br>
+3. Now attacker has >750k votes (majority)<br>
 
 **Phase 2: Queue Malicious Proposal**
 4. Call `governance.queueAction()` with:
    - Target: SelfiePool address
    - Value: 0
-   - Data: `emergencyExit(recovery)` encoded
-5. Action queued with actionId, timestamp recorded
+   - Data: `emergencyExit(recovery)` encoded<br>
+5. Action queued with actionId, timestamp recorded<br>
 
 **Phase 3: Repay and Wait**
-6. Approve flash loan repayment
-7. Return flash loan (lose tokens but KEEP the queued action)
-8. Wait 2 days for governance timelock
+6. Approve flash loan repayment<br>
+7. Return flash loan (lose tokens but KEEP the queued action)<br>
+8. Wait 2 days for governance timelock<br>
 
 **Phase 4: Execute**
-9. Call `governance.executeAction(actionId)`
-10. EmergencyExit executes, sending all 1.5M DVT to recovery
+9. Call `governance.executeAction(actionId)`<br>
+10. EmergencyExit executes, sending all 1.5M DVT to recovery<br>
 
 ---
 
