@@ -14,7 +14,7 @@
 **Severity:** Critical
 **Attack Complexity:** Low (single atomic sequence using in-scope assets)
 **Impact:** Drain of the lending pool's `1,000,000` DVT under CTF conditions
-**Root Cause:** Blind trust in a single, manipulable, on-chain spot price from a shallow DEX pool — no TWAP, no aggregation, no sanity checks, and the protocol exposure far exceeds oracle pool depth.
+**Root Cause:** Blind trust in a single, manipulable, on-chain spot price from a shallow DEX pool no TWAP, no aggregation, no sanity checks, and the protocol exposure far exceeds oracle pool depth.
 
 ---
 
@@ -57,7 +57,7 @@ function _getOracleQuote(uint256 amount) private view returns (uint256) {
 
 * The oracle reads **live Uniswap reserves** and computes a proportional conversion (`quote`) with no time-weighting (TWAP) or cross-source aggregation.
 * Because the underlying Uniswap pair is *very shallow* compared to the lending pool exposure, **a single, large swap** changes the pair reserves enough to produce a drastically different quoted price within the same block/transaction.
-* The lending contract trusts that instantaneous quote to decide collateral (and in the test it expects the deposit to be ~`3×` value — the pool enforces a multiplier), enabling an attacker to reduce required collateral to a tiny fraction of the true market value and borrow the entire pool.
+* The lending contract trusts that instantaneous quote to decide collateral (and in the test it expects the deposit to be ~`3×` value the pool enforces a multiplier), enabling an attacker to reduce required collateral to a tiny fraction of the true market value and borrow the entire pool.
 
 **Short:** The protocol trusts an instantly manipulable spot price from a single low-liquidity pool as the authoritative oracle.
 
@@ -179,7 +179,7 @@ deposit_after = quote_result × 3 / 1e18
               ≈ 29.58267 WETH
 ```
 
-**Result:** After the attacker's single swap, the required deposit to borrow the entire pool has dropped from **300,000 WETH** to **≈29.58 WETH**. The attacker started with 20 ETH and received ~9.9 WETH from the swap, totaling ~29.9 WETH available — sufficient to meet the manipulated collateral requirement.
+**Result:** After the attacker's single swap, the required deposit to borrow the entire pool has dropped from **300,000 WETH** to **≈29.58 WETH**. The attacker started with 20 ETH and received ~9.9 WETH from the swap, totaling ~29.9 WETH available sufficient to meet the manipulated collateral requirement.
 
 ---
 
