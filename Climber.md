@@ -375,7 +375,10 @@ Red flags:
 **Total Time:** ~2 hours
 
 ---
-*Report generated on [07-11-2025] by [0xUnavailable]*
+
+*Report generated on [07-11-2025] by [0xUnavailable]*  
 *GitHub: [https://github.com/0xUnavailable]*  
 *Twitter: [https://x.com/0xUnavailable]*
+
+
 ---
