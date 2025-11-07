@@ -140,7 +140,7 @@ The operation identifier is computed deterministically via `getOperationId(targe
 6. **Operation 4:** Call back to attacker contract's `scheduleOperation()` function - This function then calls `timelock.schedule()` with the same parameters (same targets, values, dataElements, and the same salt)
 
 **(Clarification on ordering)**
-The PoC implements `updateDelay` → `grantRole` → `upgradeToAndCall` → `schedule`. This ordering works because role grants and delay updates take effect immediately in the same transaction, and the `schedule()` call in Operation 4 uses the identical deterministic `salt`/parameters so the `getOperationState(id)` check performed after the loop will return `ReadyForExecution`.
+The PoC implements `updateDelay` → `grantRole` → `upgradeToAndCall` → `schedule`. This ordering works because role grants and delay updates take effect immediately in the same transaction, and the `schedule()` call in Operation 4 uses the identical deterministic `salt` parameters so the `getOperationState(id)` check performed after the loop will return `ReadyForExecution`.
 
 **Phase 3: State Validation**
 
@@ -378,3 +378,4 @@ Red flags:
 *Report generated on [07-11-2025] by [0xUnavailable]*
 *GitHub: [https://github.com/0xUnavailable]*  
 *Twitter: [https://x.com/0xUnavailable]*
+---
